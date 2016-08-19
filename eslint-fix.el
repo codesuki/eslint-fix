@@ -37,4 +37,4 @@
 
 (provide 'eslint-fix)
 
-;;; eslint-fix ends here
+;;; eslint-fix.el ends here
