@@ -21,20 +21,22 @@
 ;;     (Choose depending on your favorite mode.)
 ;;
 ;;     (eval-after-load 'js-mode
-;;       '(add-hook 'js-mode-hook (lambda () (add-hook 'after-save-hook 'eslint-fix))))
+;;       '(add-hook 'js-mode-hook (lambda () (add-hook 'after-save-hook 'eslint-fix nil t))))
 ;;
 ;;     (eval-after-load 'js2-mode
-;;       '(add-hook 'js2-mode-hook (lambda () (add-hook 'after-save-hook 'eslint-fix))))
+;;       '(add-hook 'js2-mode-hook (lambda () (add-hook 'after-save-hook 'eslint-fix nil t))))
 
 ;;; Code:
+
+;;;###autoload
 (defun eslint-fix ()
   "Format the current file with ESLint."
   (interactive)
   (if (executable-find "eslint")
-	  (progn (call-process "eslint" nil "*ESLint Errors*" nil "--fix" buffer-file-name)
-			 (revert-buffer t t t)))
-  (message "ESLint not found."))
+      (progn (call-process "eslint" nil "*ESLint Errors*" nil "--fix" buffer-file-name)
+             (revert-buffer t t t))
+    (message "ESLint not found.")))
 
 (provide 'eslint-fix)
 
-;;; eslint-fix ends here
+;;; eslint-fix.el ends here
