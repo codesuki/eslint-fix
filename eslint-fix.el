@@ -12,7 +12,7 @@
 
 ;;; Commentary:
 ;;
-;; This file provies `eslint-fix', which fixes the current file using ESLint.
+;; This file provides `eslint-fix', which fixes the current file using ESLint.
 ;;
 ;; Usage:
 ;;     M-x eslint-fix
