@@ -27,6 +27,8 @@
 ;;       '(add-hook 'js2-mode-hook (lambda () (add-hook 'after-save-hook 'eslint-fix))))
 
 ;;; Code:
+
+;;;###autoload
 (defun eslint-fix ()
   "Format the current file with ESLint."
   (interactive)
