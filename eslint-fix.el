@@ -32,10 +32,15 @@
 (defun eslint-fix ()
   "Format the current file with ESLint."
   (interactive)
-  (if (executable-find "eslint")
-      (progn (call-process "eslint" nil "*ESLint Errors*" nil "--fix" buffer-file-name)
-             (revert-buffer t t t))
-    (message "ESLint not found.")))
+  (let* ((root (locate-dominating-file
+                (or (buffer-file-name) default-directory)
+                "node_modules"))
+         (eslint (and root
+                      (expand-file-name "node_modules/.bin/eslint"
+                                        root))))
+    (progn (call-process eslint nil "*ESLint Errors*" nil "--fix" buffer-file-name)
+           (revert-buffer t t t))
+    ))
 
 (provide 'eslint-fix)
 
