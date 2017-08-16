@@ -28,12 +28,20 @@
 
 ;;; Code:
 
-;;;###autoload
+(defgroup eslint-fix nil
+  "Fix ESLint errors automatically"
+  :group 'convenience
+  :prefix "eslint-fix")
+
+(defcustom eslint-fix-eslint-bin (executable-find "eslint")
+  "The path the ESLint executable"
+  :type 'string)
+
 (defun eslint-fix ()
   "Format the current file with ESLint."
   (interactive)
-  (if (executable-find "eslint")
-      (progn (call-process "eslint" nil "*ESLint Errors*" nil "--fix" buffer-file-name)
+  (if eslint-fix-eslint-bin
+      (progn (call-process eslint-fix-eslint-bin nil "*ESLint Errors*" nil "--fix" buffer-file-name)
              (revert-buffer t t t))
     (message "ESLint not found.")))
 
