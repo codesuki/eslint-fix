@@ -1,5 +1,5 @@
 # eslint-fix
-Fix current file using `ESLint --fix`
+Fix current file using `ESLint --fix --quiet`
 
 ## Usage
 `M-x eslint-fix`
