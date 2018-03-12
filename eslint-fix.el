@@ -33,7 +33,7 @@
   "Format the current file with ESLint."
   (interactive)
   (if (executable-find "eslint")
-      (progn (call-process "eslint" nil "*ESLint Errors*" nil "--fix" buffer-file-name)
+      (progn (call-process "eslint" nil "*ESLint Errors*" nil "--fix" "--quiet" buffer-file-name)
              (revert-buffer t t t))
     (message "ESLint not found.")))
 
