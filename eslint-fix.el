@@ -28,14 +28,36 @@
 
 ;;; Code:
 
+(defgroup eslint-fix nil
+  "Fix JavaScript linting issues with ‘eslint-fix’."
+  :group 'tools)
+
+(defcustom eslint-fix-executable "eslint"
+  "The ESLint executable to use."
+  :type 'string)
+
+(defcustom eslint-fix-options nil
+  "Additional options to pass to ESLint (e.g. “--quiet”)."
+  :type '(repeat string))
+
 ;;;###autoload
 (defun eslint-fix ()
   "Format the current file with ESLint."
   (interactive)
-  (if (executable-find "eslint")
-      (progn (call-process "eslint" nil "*ESLint Errors*" nil "--fix" buffer-file-name)
-             (revert-buffer t t t))
-    (message "ESLint not found.")))
+  (unless buffer-file-name
+    (error "ESLint requires a file-visiting buffer"))
+  (when (buffer-modified-p)
+    (if (y-or-n-p (format "Save file %s? " buffer-file-name))
+        (save-buffer)
+      (error "ESLint may only be run on an unmodified buffer")))
+
+  (let ((eslint (executable-find eslint-fix-executable))
+        (options (append eslint-fix-options
+                         (list "--fix" buffer-file-name))))
+    (unless eslint
+      (error "Executable ‘%s’ not found" eslint-fix-executable))
+    (apply #'call-process eslint nil "*ESLint Errors*" nil options)
+    (revert-buffer t t t)))
 
 (provide 'eslint-fix)
 
