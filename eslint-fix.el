@@ -7,7 +7,7 @@
 ;; Author: Neri Marschik <marschik_neri@cyberagent.co.jp>
 ;; Version: 1.0
 ;; Package-Requires: ()
-;; Keywords: javascript, eslint, lint, formatting, style
+;; Keywords: tools, javascript, eslint, lint, formatting, style
 ;; URL: https://github.com/codesuki/eslint-fix
 
 ;;; Commentary:
