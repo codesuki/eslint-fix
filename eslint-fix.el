@@ -30,14 +30,18 @@
 
 (defgroup eslint-fix nil
   "Fix JavaScript linting issues with ‘eslint-fix’."
+  :link '(function-link eslint-fix)
+  :tag "ESLint Fix"
   :group 'tools)
 
 (defcustom eslint-fix-executable "eslint"
   "The ESLint executable to use."
+  :tag "ESLint Executable"
   :type 'string)
 
 (defcustom eslint-fix-options nil
   "Additional options to pass to ESLint (e.g. “--quiet”)."
+  :tag "ESLint Options"
   :type '(repeat string))
 
 ;;;###autoload
