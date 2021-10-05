@@ -63,6 +63,14 @@
     (apply #'call-process eslint nil "*ESLint Errors*" nil options)
     (revert-buffer t t t)))
 
+;;;###autoload
+(define-minor-mode eslint-fix-auto-mode
+  "Run `eslint-fix' after save."
+  :group 'eslint-fix
+  (if eslint-fix-auto-mode
+      (add-hook 'after-save-hook #'eslint-fix nil t)
+    (remove-hook 'after-save-hook #'eslint-fix t)))
+
 (provide 'eslint-fix)
 
 ;;; eslint-fix.el ends here
